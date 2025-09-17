@@ -36,7 +36,10 @@ async function ghiThongKe(thongKe) {
 // API nhận thống kê game
 app.post('/stats', async (req, res) => {
     try {
-        const thongKeMoi = req.body;
+        const thongKeMoi = {
+            ...req.body,
+            thoiGian: new Date().toISOString()
+        };
         const thongKe = await docThongKe();
         thongKe.push(thongKeMoi);
         await ghiThongKe(thongKe);
